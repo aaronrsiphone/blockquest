@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLOCKQUEST</title>
+    <script type="module" crossorigin src="/assets/index-DOlMEvbN.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Cuy6lSOm.css">
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- HUD -->
+    <div id="crosshair" class="hidden"></div>
+    <div id="hotbar" class="hidden"></div>
+    <div id="hud-hint" class="hidden">Left-click: break &nbsp;•&nbsp; Right-click: place &nbsp;•&nbsp; Click TNT to ignite</div>
+    <div id="hud-time" class="hidden"></div>
+
+    <!-- Start screen -->
+    <div id="start-screen">
+      <div class="panel">
+        <h1 class="title">BLOCK<span>QUEST</span></h1>
+        <p class="subtitle">an infinite-afternoon voxel sandbox</p>
+        <div class="seed-row">
+          <label for="seed-input">SEED</label>
+          <input id="seed-input" type="text" maxlength="16" placeholder="random" autocomplete="off" />
+        </div>
+        <button id="play-btn" class="btn big">▶ PLAY</button>
+        <div class="controls-grid">
+          <div><b>WASD</b> move</div>
+          <div><b>Mouse</b> look</div>
+          <div><b>Space</b> jump</div>
+          <div><b>Shift</b> sprint</div>
+          <div><b>Space ×2</b> fly</div>
+          <div><b>1–9 / wheel</b> blocks</div>
+          <div><b>LMB</b> break</div>
+          <div><b>RMB</b> place</div>
+          <div><b>Esc</b> pause</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pause menu -->
+    <div id="pause-screen" class="hidden">
+      <div class="panel">
+        <h1 class="title small">PAUSED</h1>
+        <button id="resume-btn" class="btn">Resume Game</button>
+        <button id="save-btn" class="btn">Save World</button>
+        <button id="reset-btn" class="btn danger">Reset World</button>
+        <div id="save-msg"></div>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading-screen" class="hidden">
+      <div class="panel"><h1 class="title small">Generating world…</h1><div class="loader-bar"><div></div></div></div>
+    </div>
+
+  </body>
+</html>

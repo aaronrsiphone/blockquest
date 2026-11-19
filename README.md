@@ -5,12 +5,41 @@ All textures, sounds, and terrain are generated procedurally — zero external a
 
 ## Play
 
+**Easiest (any machine):** after cloning the repo, run once:
+
+```bash
+./install.sh
+```
+
+That installs a **BLOCKQUEST** icon in your applications menu. Clicking it
+starts a local server and opens the game in the browser. The repo ships a
+pre-built `dist/`, so no Node.js is required to play — python3 is enough.
+
+**Developers:**
+
 ```bash
 npm install
 npm run dev     # → http://localhost:5173
 ```
 
 Production build: `npm run build` · Type check: `npx tsc --noEmit`
+
+### Packaging (how the desktop icon works)
+
+```bash
+./install.sh                        # one-time setup on a new machine
+./launch-blockquest.sh              # serves dist/ on :8044, opens browser
+./launch-blockquest.sh --no-browser # just start the server
+```
+
+- `install.sh` — builds if needed, installs the applications-menu entry
+- `serve.mjs` — zero-dependency Node static server for `dist/`
+  (falls back to `python3 -m http.server` if Node is absent)
+- `icons/blockquest-icon.png` — generated from the game's own hotbar art
+  (regenerate with `node test/icon.mjs` while the game is served)
+
+Note: saved worlds live in the browser's localStorage per address, so worlds
+saved while playing on :8044 (the icon) are separate from :5173 (dev).
 
 ## Controls
 
