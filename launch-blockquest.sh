@@ -18,7 +18,7 @@ if ! already_running; then
   if command -v node >/dev/null 2>&1; then
     nohup node "$DIR/serve.mjs" > "$LOG" 2>&1 &
   elif command -v python3 >/dev/null 2>&1; then
-    ( cd "$DIR/dist" && nohup python3 -m http.server "$PORT" --bind 127.0.0.1 > "$LOG" 2>&1 & )
+    ( cd "$DIR" && nohup python3 serve.py > "$LOG" 2>&1 & )
   else
     echo "BLOCKQUEST: need Node.js or python3 to run the game server." >&2
     exit 1

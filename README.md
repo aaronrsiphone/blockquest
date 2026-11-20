@@ -47,7 +47,7 @@ saved while playing on :8044 (the icon) are separate from :5173 (dev).
 |---|---|
 | WASD | Move |
 | Mouse | Look |
-| Space | Jump (double-tap: toggle flight) |
+| Space / F | Jump (double-tap either: toggle flight) |
 | Shift | Sprint (in flight: descend) |
 | Left click | Break block (click TNT to ignite it!) |
 | Right click | Place selected block |
@@ -72,6 +72,8 @@ saved while playing on :8044 (the icon) are separate from :5173 (dev).
 - Web Audio synthesized SFX: break, place, step, jump, fuse, explosion
 - World persistence: seed + block edits + player position in localStorage
 - Custom seeds from the start screen; Reset World for a fresh start
+- "Update Game" button on the start screen runs `git pull` on the local
+  repo (via the :8044 server) and reloads — pull new versions with one click
 
 ## Structure
 

@@ -237,6 +237,7 @@ class Game {
         case 'KeyA': this.input.left = true; break;
         case 'KeyD': this.input.right = true; break;
         case 'Space':
+        case 'KeyF':
           e.preventDefault();
           if (!this.input.jump) this.player.tryToggleFly(this.clock.elapsedTime);
           this.input.jump = true;
@@ -258,7 +259,10 @@ class Game {
         case 'KeyS': this.input.back = false; break;
         case 'KeyA': this.input.left = false; break;
         case 'KeyD': this.input.right = false; break;
-        case 'Space': this.input.jump = false; break;
+        case 'Space':
+        case 'KeyF':
+          this.input.jump = false;
+          break;
         case 'ShiftLeft':
         case 'ShiftRight':
           this.input.sprint = false;
@@ -286,6 +290,37 @@ class Game {
     const resumeBtn = document.getElementById('resume-btn')!;
     const saveBtn = document.getElementById('save-btn')!;
     const resetBtn = document.getElementById('reset-btn')!;
+    const updateBtn = document.getElementById('update-btn')!;
+    const updateMsg = document.getElementById('update-msg')!;
+
+    updateBtn.addEventListener('click', async () => {
+      updateBtn.textContent = '⟳ Updating…';
+      updateMsg.textContent = '';
+      try {
+        const r = await fetch('/__update', {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'blockquest' },
+        });
+        const ct = r.headers.get('content-type') || '';
+        if (!ct.includes('application/json')) throw new Error('no-endpoint');
+        const data = (await r.json()) as { ok: boolean; output: string };
+        if (data.ok) {
+          updateBtn.textContent = '✓ Updated';
+          updateMsg.textContent = data.output || 'Already up to date.';
+          setTimeout(() => {
+            // cache-busted reload to pick up the new build
+            location.href = location.pathname + '?v=' + Date.now();
+          }, 1200);
+        } else {
+          updateBtn.textContent = '⟳ Update Game (git pull)';
+          updateMsg.textContent = 'Update failed: ' + (data.output || 'unknown error');
+        }
+      } catch {
+        updateBtn.textContent = '⟳ Update Game (git pull)';
+        updateMsg.textContent =
+          'Updates are only available when playing via the desktop icon (localhost:8044).';
+      }
+    });
 
     playBtn.addEventListener('click', () => {
       this.sfx.click();

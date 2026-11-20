@@ -57,6 +57,14 @@ canvas { display: block; }
   cursor: pointer;
 }
 .slot canvas { width: 40px; height: 40px; image-rendering: pixelated; }
+#update-msg {
+  color: #9fb0cc;
+  font-size: 11px;
+  min-height: 15px;
+  margin: 4px auto 0;
+  white-space: pre-wrap;
+  max-width: 340px;
+}
 .slot .num {
   position: absolute;
   top: 1px; left: 4px;
@@ -186,6 +194,7 @@ canvas { display: block; }
 .btn:hover { filter: brightness(1.12); }
 .btn:active { transform: translateY(2px); border-bottom-width: 3px; }
 .btn.big { font-size: 22px; padding: 18px; }
+.btn.small { font-size: 13px; padding: 9px; background: #4a5568; border-color: #2d3748; letter-spacing: 1px; }
 .btn.danger { background: #a8433a; border-color: #6e241d; }
 
 .controls-grid {

@@ -1,0 +1,15 @@
+import { chromium } from 'playwright';
+const browser = await chromium.launch({ headless: true });
+const page = await browser.newPage();
+const errors = [];
+page.on('pageerror', (e) => errors.push(e.message));
+page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+await page.goto('http://localhost:8044/');
+await page.click('#play-btn');
+await page.waitForSelector('#pause-screen:not(.hidden)', { timeout: 30000 });
+await page.click('#resume-btn');
+await page.waitForTimeout(1500);
+const ok = await page.evaluate(() => window.game.running && document.pointerLockElement !== null);
+console.log('game running from repo dist:', ok ? 'YES ✓' : 'NO ✗');
+console.log(errors.length ? 'ERRORS: ' + errors.join(' | ') : 'No console errors.');
+await browser.close();
